@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block title %}
+Search
+{% endblock title %}
+
+
+
+{% block body %}
+ <h3 class="text-center"><span>Search Your Details</span> </h3>
+  
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+    {{message}}
+
+
+</div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+<br>
+<div class="container">
+
+<div class="row">
+
+<div class="col-md-4">
+<form action="/search" method="post">
+<!-- <div class="form-group">
+  <select class="form-control" id="roll" name="roll"  required>
+    <option selected>Select Roll Number</option>
+    {% for e in du  %}
+    <option value="{{e.rollno}}">{{e.rollno}}</option>
+    {% endfor %}
+    
+  </select>
+</div> 
+<br> -->
+<label for="roll">Enter Your Roll Number</label>
+<input type="text" class="form-control" name="roll" id="roll" placeholder="Use Small Letter" value="All">
+<br>
+
+<div class="form-group">
+  <select class="form-control" id="project1" name="project1" value="NULL"  required>
+    <option selected>All Topic</option>
+    {% for d in stud  %}
+    <option value="{{d.ptopic}}">{{d.ptopic}}</option>
+    {% endfor %}
+  </select>
+</div> 
+<br>
+
+
+<!-- <label for="attendance">Enter Your Roll Number</label>
+<input type="text" class="form-control" name="roll" id="roll" placeholder="Use Small Letter" value="NULL"> -->
+<!-- <label for="Project1">Enter Project</label>
+<input type="text" class="form-control" name="project1" id="project1" placeholder="Use Small Letter" value="NULL"> -->
+
+<br>
+
+  <button type="submit" class="btn btn-danger btn-sm btn-block">Search</button>
+</form>
+<br>
+<br>
+
+</div>
+
+
+<div class="col-md-8">
+{% if bio %}
+<br>
+{% for post  in bio %}
+
+<h3>Details of {{post.rollno}}</h3>
+ <hr>
+ 
+ <li>Roll No : {{post.rollno}}</li>
+
+ <li>Name    : {{post.sname}}</li>
+  <li>Sem   : {{post.sem}}</li>
+  <li>Gender   : {{post.gender}}</li>
+  <li>Branch  : {{post.branch}}</li>
+  <li>Email  : {{post.email}}</li>
+  <li>Project Topic  : {{post.ptopic}}</li>
+  <li>Project link  : <a href="{{bio.address}}">{{post.address}}</a></li>
+  <hr>
+  
+<br><br>
+{% endfor %}
+{% else %}
+No such results
+{% endif %}
+
+</div>
+</div>
+
+
+
+{% endblock body %}
